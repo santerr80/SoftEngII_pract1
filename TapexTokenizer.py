@@ -9,4 +9,3 @@ def tapex_tokenizer(my_table, my_query):
     encoding = tokenizer(table=my_table, query=my_query, return_tensors="pt")
     outputs = model.generate(**encoding)
     return tokenizer.batch_decode(outputs, skip_special_tokens=True)
-    
