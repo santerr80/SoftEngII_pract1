@@ -38,7 +38,7 @@ async def root():
 async def request_create(request: Request):
     my_request = request.my_request
     app.state.my_request = my_request
-    return {"Request": "my_request"}
+    return {"Request": my_request}
 
 
 """
