@@ -53,10 +53,13 @@ async def request_create(request: Request):
 
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile = File(...)):
-    df = pd.read_csv(file.file, encoding='utf-8', sep=';')
-    df = df.to_json()  # Преобразование dataframe в JSON-строку
-    app.state.df = df  # Сохранение dataframe в state приложения
-    return {"filename": file.filename, "dataframe": df}
+    try:
+        df = pd.read_csv(file.file, encoding='utf-8', sep=';')
+        df = df.to_json()  # Преобразование dataframe в JSON-строку
+        app.state.df = df  # Сохранение dataframe в state приложения
+        return {"filename": file.filename, "dataframe": df}
+    except Exception as e:
+        return {"message": str(e)}
 
 
 """
